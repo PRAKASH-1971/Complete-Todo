@@ -33,4 +33,15 @@ const toggleTodoFailure = () =>{
 }
 
 
-export {getTodoRequest, getTodoSuccess, getTodoFailure, addTodoFailure,addTodoSuccess,addTodoRequest,toggleTodoRequest,toggleTodoFailure,toggleTodoSuccess};
+const removeTodoRequest = () =>{
+    return { type:types.REMOVE_TODO_REQUEST}
+}
+const removeTodoSuccess = (payload) =>{
+    return { type:types.REMOVE_TODO_SUCCESS, payload}
+}
+const removeTodoFailure = () =>{
+    return { type:types.REMOVE_TODO_FAILURE}
+}
+
+
+export {getTodoRequest, getTodoSuccess, getTodoFailure, addTodoFailure,addTodoSuccess,addTodoRequest,toggleTodoRequest,toggleTodoFailure,toggleTodoSuccess,removeTodoRequest,removeTodoSuccess,removeTodoFailure};

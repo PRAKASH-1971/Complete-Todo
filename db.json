@@ -1,31 +1,6 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "json-server",
-      "status": false
-    },
-    {
-      "title": "ihivdi",
-      "status": false,
-      "id": 2
-    },
-    {
-      "title": "hioocijoe",
-      "status": true,
-      "id": 3
-    },
-    {
-      "title": "dgtnrbs",
-      "status": true,
-      "id": 4
-    },
-    {
-      "title": "gvfds",
-      "status": false,
-      "id": 5
-    },
-    {
       "title": "efvw",
       "status": false,
       "id": 6

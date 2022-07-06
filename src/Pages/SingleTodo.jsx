@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector,useDispatch} from "react-redux"
-import {useParams} from "react-router-dom"
-import { toggleTodoFailure, toggleTodoRequest, toggleTodoSuccess } from '../Redux/action'
+import {useNavigate, useParams,Link} from "react-router-dom"
+import { removeTodoFailure, removeTodoRequest, removeTodoSuccess, toggleTodoFailure, toggleTodoRequest, toggleTodoSuccess } from '../Redux/action'
 import axios from "axios"
 
 const SingleTodo = () => {
   const [currentTodo,setCurrentTodo] = useState({});
     const todos = useSelector((state) => state.todos)
     // console.log(todos,"ewq");
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const { id }= useParams();
 
@@ -20,12 +21,23 @@ const SingleTodo = () => {
     .catch((e)=> dispatch(toggleTodoFailure(e)))
     }
  
-    useEffect(()=>{
-        let currentTodo = todos.find((item)=> item.id === Number(id));
-        currentTodo && setCurrentTodo(currentTodo);
-    },[todos,id]);
 
+const removeTodo = ()=>{
+  dispatch(removeTodoRequest());
+  axios
+  .delete(`/todos/${id}`)
+  .then((r)=> {
+  dispatch(removeTodoSuccess(id))
+  navigate("/")
+  window.location.reload(true);
+})
+  .catch((e)=> dispatch(removeTodoFailure(e)));
+}
 
+useEffect(()=>{
+  let currentTodo = todos.find((item)=> item.id === Number(id));
+  currentTodo && setCurrentTodo(currentTodo);
+},[todos,id]);
 
 
   return (
@@ -33,7 +45,11 @@ const SingleTodo = () => {
         <h2>{currentTodo?.title}
         {currentTodo?.status?"True":"False"}
         </h2>
-        <button onClick={()=>{toggleStatus(currentTodo.id, !currentTodo.status)}}>Toggle</button>
+        <button onClick={()=>toggleStatus(currentTodo.id, !currentTodo.status)}>Toggle</button>
+        <button onClick={()=>removeTodo(currentTodo.id)}>Delete</button>
+        <Link to={`/todo/${currentTodo.id}/edit`}>
+        <button>EDIT</button>
+        </Link>
 
     </div>
   )

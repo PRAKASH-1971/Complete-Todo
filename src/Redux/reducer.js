@@ -72,6 +72,27 @@ switch(type){
         isLoading:false,
         isError:true,
     }
+
+    case types.REMOVE_TODO_REQUEST:
+    return{
+        ...state,
+        isLoading:true,
+        isError:false,
+    };
+  case types.REMOVE_TODO_SUCCESS:
+    var leftTodos = state.todos.filter((item)=> item.id !== payload);
+    return{
+        ...state,
+        todos: leftTodos,
+        isLoading:false,
+        isError:false,
+    };
+  case types.REMOVE_TODO_FAILURE:
+    return{
+        ...state,
+        isLoading:false,
+        isError:true,
+    }
     default:
         return state;
   }  
